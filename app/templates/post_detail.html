@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <p>Author object: {{ post.author }}</p>
+
+    <h1>{{ post.title }}</h1>
+    <p>作者：{{ post.author.username }} | {{ post.create_time }}</p>
+    <div>{{ post.content }}</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>新建</h1>
+<form action="{{ url_for('post.create_post') }}" method="POST">
+    <label for="title">标题</label>
+    <input type="text" name="title" id="title" required>
+
+    <div>
+        <label for="content">内容</label>
+        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    </div>
+
+    <button type="submit">提交</button>
+</form>
+{% endblock %}
