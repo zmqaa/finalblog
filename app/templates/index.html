@@ -3,7 +3,13 @@
 {% block title %}主页{% endblock %}
 
 {% block content %}
+    <form action="{{ url_for('post.search_post') }}" method="get">
+        <input type="text" name="q" placeholder="点此搜索">
+        <button type="submit">搜索</button>
+    </form>
     <h1>文章</h1>
+    <small>共{{ len }}篇</small>
+    <br>
     {% if current_user.is_authenticated %}
         <a href="{{ url_for('post.create_post') }}">发布</a>
     {% endif %}
@@ -17,4 +23,25 @@
         {% endfor %}
     </ul>
 
+    <div>
+        {% if posts.has_prev %}
+            <a href="{{ url_for('post.index', page=posts.prev_num) }}">上一页</a>
+        {% endif %}
+    </div>
+
+    {% for page in posts.iter_pages(left_edge=2, left_current=2, right_current=3, right_edge=2) %}
+        {% if page %}
+            {% if page== posts.page %}
+                <a href="{{ url_for('post.index', page=page) }}">{{ page }}</a>
+            {% else %}
+                <a href="{{ url_for('post.index', page=page) }}">{{ page }}</a>
+            {% endif %}
+        {% else %}
+            <span>...</span>
+        {% endif %}
+    {% endfor %}
+
+    {% if posts.has_next %}
+        <a href="{{ url_for('post.index', page=posts.next_num) }}">下一页</a>
+    {% endif %}
 {% endblock %}

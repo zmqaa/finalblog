@@ -3,10 +3,57 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <p>Author object: {{ post.author }}</p>
 
     <h1>{{ post.title }}</h1>
     <p>作者：{{ post.author.username }} | {{ post.create_time }}</p>
     <div>{{ post.content }}</div>
+
+    <h2>评论</h2>
+    <small>共{{ len }}条评论</small>
+    <ul>
+        {% for comment in comments.items %}
+            <li>
+                <p><small>{{ comment.author.username }}| {{ comment.comment_time }}</small></p>
+                <p>{{ comment.content }}</p>
+            </li>
+            <div>
+                <a href="{{ url_for('comment.delete_comment', comment_id=comment.id) }}">删除</a>
+            </div>
+        {% endfor %}
+    </ul>
+
+    <div>
+    {% if comments.has_prev %}
+        <a href="{{ url_for('post.post_detail', page=comments.prev_num, post_id=post.id) }}">上一页</a>
+    {% endif %}
+    </div>
+
+    {% for page in comments.iter_pages(left_edge=2, left_current=2, right_current=3, right_edge=2) %}
+        {% if page %}
+            {% if page== comments.page %}
+                <a href="{{ url_for('post.post_detail', page=page, post_id=post.id) }}">{{ page }}</a>
+            {% else %}
+                <a href="{{ url_for('post.post_detail', page=page, post_id=post.id) }}">{{ page }}</a>
+            {% endif %}
+        {% else %}
+            <span>...</span>
+        {% endif %}
+    {% endfor %}
+
+    <div>
+        {% if comments.has_next %}
+            <a href="{{ url_for('post.post_detail', page=comments.next_num, post_id=post.id) }}">下一页</a>
+        {% endif %}
+    </div>
+    <div>
+        <form action="{{ url_for('comment.create_comment', post_id=post.id) }}" method="post">
+            <div>
+                <label for="content">评论</label>
+                <input type="text" name="content">
+                <button type="submit">提交</button>
+            </div>
+        </form>
+    </div>
+
 
 {% endblock %}

@@ -36,7 +36,9 @@ def create_app():
     #注册蓝图
     from app.views.auth import auth_bp
     from app.views.post import post_bp
+    from app.views.comment import comment_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(post_bp, url_prefix='/')
+    app.register_blueprint(comment_bp, url_prefix='/com')
 
     return app
