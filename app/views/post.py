@@ -1,8 +1,8 @@
 from flask import render_template, Blueprint, request, redirect, url_for, flash
 from ..models import Post, Comment
 from app import db
-from flask_login import current_user
-
+from flask_login import current_user, login_required
+import math
 
 post_bp = Blueprint('post', __name__)
 
@@ -12,12 +12,13 @@ def index():
     #获取页码
     page = request.args.get('page', 1, type=int)
     per_page = 5
+    al_page = math.ceil(post_count / per_page)
     posts = Post.query.order_by(Post.create_time.desc()).paginate(
         page=page,
         per_page=per_page,
         error_out=False
     )
-    return render_template('index.html', posts=posts, len=post_count)
+    return render_template('index.html', posts=posts, len=post_count, al_page=al_page)
 
 @post_bp.route('/post/<int:post_id>')
 def post_detail(post_id):
@@ -33,6 +34,7 @@ def post_detail(post_id):
     return render_template('post_detail.html', post=post, comments=comments, len=comment_count)
 
 @post_bp.route('/create_post', methods=['GET', 'POST'])
+@login_required
 def create_post():
     if request.method == 'POST':
         title = request.form['title']
@@ -46,6 +48,7 @@ def create_post():
     return render_template('create_post.html')
 
 @post_bp.route('/edit_post/<int:post_id>', methods=["GET", "POST"])
+@login_required
 def edit_post(post_id):
     post = Post.query.get_or_404(post_id) #获取post对象
 
@@ -59,6 +62,7 @@ def edit_post(post_id):
     return render_template('edit_post.html', post=post)
 
 @post_bp.route('delete_post/<int:post_id>', methods=["GET", "POST"])
+@login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
 

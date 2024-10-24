@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import click
+from flask_migrate import Migrate
 
 #创建数据库实例和登录管理实例
 db = SQLAlchemy()
@@ -12,7 +13,8 @@ def create_app():
     app = Flask(__name__)
     #从config.py中读取配置
     app.config.from_object('config.Config')
-
+    #初始化数据库迁移
+    migrate = Migrate(app, db)
     #初始化数据库和管理系统
     db.init_app(app)
     login_manager.init_app(app)
@@ -33,12 +35,16 @@ def create_app():
         db.create_all()
         click.echo('数据库已初始化')
 
+
     #注册蓝图
     from app.views.auth import auth_bp
     from app.views.post import post_bp
     from app.views.comment import comment_bp
+    from .api import api_bp
+    from app.views.notification import notifications_bp
+    app.register_blueprint(notifications_bp, url_prefix='/notifications')
+    app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(post_bp, url_prefix='/')
     app.register_blueprint(comment_bp, url_prefix='/com')
-
     return app

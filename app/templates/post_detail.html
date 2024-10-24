@@ -5,19 +5,28 @@
 {% block content %}
 
     <h1>{{ post.title }}</h1>
-    <p>作者：{{ post.author.username }} | {{ post.create_time }}</p>
+    <div>
+        <img src="{{ url_for('static', filename=post.author.avatar) }}" alt="头像" class="avatar">
+    </div>
+    <p>作者：{{ post.author.username }} | {{ post.create_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
     <div>{{ post.content }}</div>
 
     <h2>评论</h2>
     <small>共{{ len }}条评论</small>
     <ul>
         {% for comment in comments.items %}
-            <li>
-                <p><small>{{ comment.author.username }}| {{ comment.comment_time }}</small></p>
+            <li class="comment">
+                <div class="user_info">
+                    <img src="{{ url_for('static', filename=comment.author.avatar) }}" alt="头像" class="comment_avatar">
+                    <p><small>{{ comment.author.username }}</small></p>
+                </div>
                 <p>{{ comment.content }}</p>
+                <small><div>{{ comment.comment_time.strftime('%Y-%m-%d %H:%M:%S') }}</div></small>
             </li>
             <div>
-                <a href="{{ url_for('comment.delete_comment', comment_id=comment.id) }}">删除</a>
+                {% if current_user.username == comment.author.username %}
+                    <a href="{{ url_for('comment.delete_comment', comment_id=comment.id) }}">删除</a>
+                {% endif %}
             </div>
         {% endfor %}
     </ul>
@@ -45,15 +54,16 @@
             <a href="{{ url_for('post.post_detail', page=comments.next_num, post_id=post.id) }}">下一页</a>
         {% endif %}
     </div>
-    <div>
-        <form action="{{ url_for('comment.create_comment', post_id=post.id) }}" method="post">
-            <div>
-                <label for="content">评论</label>
-                <input type="text" name="content">
-                <button type="submit">提交</button>
-            </div>
-        </form>
-    </div>
-
+    {% if current_user.is_authenticated %}
+        <div>
+            <form action="{{ url_for('comment.create_comment', post_id=post.id) }}" method="post">
+                <div>
+                    <label for="content">评论</label>
+                    <input type="text" name="content">
+                    <button type="submit">评论</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
 
 {% endblock %}

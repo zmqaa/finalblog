@@ -1,0 +1,185 @@
+.avatar {
+    width: 100px; /* 设置头像宽度 */
+    height: 100px; /* 设置头像高度，确保是正方形 */
+    border-radius: 50%; /* 使头像变为圆形 */
+    object-fit: cover; /* 确保图片不失真地覆盖整个容器 */
+    border: 2px solid #ddd; /* 设置一个淡灰色的边框 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影效果 */
+    margin: 10px; /* 外边距，避免紧贴其他内容 */
+}
+
+.user_info {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中 */
+}
+
+.comment_avatar {
+    display: inline-block; /* 将头像设置为行内块元素 */
+    width: 50px; /* 设置头像宽度 */
+    height: 50px; /* 设置头像高度，确保是正方形 */
+    border-radius: 50%; /* 使头像变为圆形 */
+    object-fit: cover; /* 确保图片不失真地覆盖整个容器 */
+    border: 2px solid #ddd; /* 设置一个淡灰色的边框 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影效果 */
+    margin-right: 10px; /* 外边距，避免紧贴其他内容 */
+}
+
+/* 导航栏整体样式 */
+nav {
+    background-color: darkslategray; /* 导航栏背景色 */
+    padding: 10px; /* 内边距，给导航栏一些空间 */
+}
+
+/* 列表样式：移除默认的内边距和列表样式 */
+nav ul {
+    list-style: none; /* 移除列表项的圆点 */
+    padding: 0;
+    margin: 0;
+    display: flex; /* 使用 Flexbox 来让列表项水平排列 */
+    justify-content: center; /* 让导航项靠左对齐，可改为 center 或 space-between */
+}
+
+/* 列表项样式 */
+nav ul li {
+    margin-right: 50px; /* 列表项之间的间距 */
+}
+
+/* 链接样式 */
+nav ul li a {
+    text-decoration: none; /* 移除下划线 */
+    color: white; /* 设置链接颜色 */
+    padding: 10px 15px; /* 增加内边距以扩大点击区域 */
+    border-radius: 5px; /* 圆角 */
+}
+
+/* 链接悬停样式 */
+nav ul li a:hover {
+    background-color: #555; /* 鼠标悬停时的背景色 */
+}
+
+
+/* 所有 input 元素的样式 */
+input {
+    padding: 10px; /* 输入框内部内容与边框的间距，确保内容不会紧贴边缘，提升视觉体验 */
+    border: 1px solid #ccc; /* 设置浅灰色边框，使输入框外观简洁 */
+    border-radius: 5px; /* 设置边框的圆角，增加视觉上的柔和感 */
+    font-size: 16px; /* 设置字体大小为16像素，确保输入文本清晰可读 */
+    width: 300px; /* 使输入框宽度占据父容器的100%，自动适应其父容器 */
+    box-sizing: border-box; /* 包括 padding 和 border 在内，不会超过设定的 width */
+    margin-bottom: 10px; /* 设置底部外边距，确保输入框之间有间距，不会堆叠 */
+}
+
+/* 使得某些特定的 input 元素如 type="submit"、type="button"继承按钮样式 */
+input[type="submit"], input[type="button"] {
+    background-color: #4CAF50; /* 设置按钮的背景色为绿色，提升视觉吸引力 */
+    color: white; /* 将按钮的文本颜色设置为白色，与背景色形成对比，便于阅读 */
+    border: none; /* 移除按钮的边框，使外观更加简洁 */
+    cursor: pointer; /* 当鼠标悬停时显示手形光标，提示用户该按钮可点击 */
+}
+
+/* 所有 button 元素的样式 */
+button {
+    background-color: darkslategray; /* 设置按钮的背景色为绿色，保持与 input[type="submit"] 一致 */
+    color: white; /* 按钮文本颜色设置为白色，易于辨认 */
+    padding: 10px 20px; /* 设置按钮的内边距，上下10px，左右20px，确保按钮大小合适，视觉舒适 */
+    border: none; /* 移除按钮默认边框，保持按钮简洁的外观 */
+    border-radius: 5px; /* 设置按钮的圆角，与输入框一致，保持统一风格 */
+    cursor: pointer; /* 鼠标悬停时显示手形光标，表明该按钮可点击 */
+    font-size: 16px; /* 设置按钮的字体大小为16像素，确保按钮文本易于阅读 */
+    margin-top: 10px; /* 设置按钮顶部的外边距，确保按钮和上方内容有足够的间距 */
+}
+
+/* 鼠标悬停时的样式 */
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: pink; /* 鼠标悬停时背景颜色变为深绿色，提供视觉反馈 */
+}
+
+/* 禁用按钮的样式 */
+button:disabled, input[type="submit"]:disabled, input[type="button"]:disabled {
+    background-color: #ccc; /* 禁用状态下背景变为灰色，表明不可点击 */
+    cursor: not-allowed; /* 鼠标指针变为禁止符号，提示用户按钮不可用 */
+}
+
+/* 文章样式 */
+.article {
+    border: 1px solid #ccc; /* 给文章添加1像素的边框，颜色是#ccc（浅灰色） */
+    padding: 15px; /* 内边距设置为15像素，内容与边框之间有一定的间隔 */
+    margin-bottom: 20px; /* 底部外边距设置为20像素，文章之间有间隔 */
+    background-color: rgba(100, 100, 100, 0.2); /* 背景颜色设置为白色 */
+    font-weight: 50;
+}
+
+.article h1 {
+    font-size: 1.5em; /* 标题的字体大小设置为1.5倍于默认大小（通常与父元素字体大小有关） */
+    margin-bottom: 10px; /* 标题底部外边距设置为10像素，使其与下方内容保持距离 */
+}
+
+.article .meta {
+    font-size: 0.9em; /* 元数据的字体大小为默认字体的0.9倍，稍微小一些 */
+    color: #555; /* 元数据的文本颜色为#555（深灰色） */
+    margin-bottom: 15px; /* 元数据底部外边距设置为15像素，与下方内容保持距离 */
+}
+
+.article .content {
+    font-size: 1em; /* 文章内容的字体大小为默认大小，通常为浏览器的默认字体尺寸 */
+}
+
+/* 评论区样式 */
+.comments {
+    margin-top: 20px; /* 评论区的顶部外边距设置为20像素，使其与上方内容保持距离 */
+}
+
+.comment {
+    border: 1px solid #ccc; /* 每条评论有1像素的浅灰色边框 */
+    padding: 10px; /* 内边距设置为10像素，确保内容与边框有一定的空间 */
+    margin-bottom: 10px; /* 每条评论的底部外边距为10像素，与下方评论保持间隔 */
+    background-color: rgba(255, 250, 250, 0.5); /* 评论的背景颜色为白色 */
+}
+
+.comment .comment-meta {
+    font-size: 0.9em; /* 评论元信息的字体大小为默认字体的0.9倍，稍微小一些 */
+    margin-bottom: 5px; /* 评论元信息底部外边距设置为5像素，保持与下方评论正文的间距 */
+    color: #333; /* 评论元信息的文字颜色设置为#333（深灰色，略深于#555） */
+}
+
+.comment .comment-body {
+    font-size: 0.95em; /* 评论正文的字体大小设置为默认字体的0.95倍，比正常字体稍微小一点 */
+    color: #444; /* 评论正文的文字颜色设置为#444（略深于#555，增强对比度） */
+}
+
+
+.ahref {
+    background-color: pink;
+    text-decoration: none; /* 去掉默认的下划线 */
+    color: white; /* 设置文字颜色，可以根据你的主题颜色修改 */
+    padding-bottom: 2px; /* 添加一些下边距，使效果更好 */
+    border-bottom: 2px solid transparent; /* 创建下划线，但默认是透明的 */
+    transition: all 0.3s ease; /* 添加过渡效果，让交互更流畅 */
+    padding: 10px 20px; /* 设置按钮的内边距，上下10px，左右20px，确保按钮大小合适，视觉舒适 */
+}
+
+.ahref:hover {
+    color: darkslategray; /* 鼠标悬停时改变文字颜色 */
+    border-bottom-color: #007BFF; /* 悬停时显示下划线 */
+    border-radius: 5px;
+}
+
+.background-image {
+    position: fixed; /* 固定在页面背景上 */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 占满页面宽度 */
+    height: 100vh; /* 占满页面高度 */
+    object-fit: cover; /* 确保图片保持比例并覆盖整个区域 */
+    opacity: 0.9; /* 调整图片透明度，0.5 代表 50% 不透明度 */
+    z-index: -1; /* 保证背景图片不遮挡其他内容 */
+}
+
+.red-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 5px; /* 使红点与文字保持一定的距离 */
+}

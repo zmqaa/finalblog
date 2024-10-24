@@ -14,19 +14,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <img src="{{ url_for('static', filename='7.jpg') }}" alt="背景" class="background-image">
     <header>
         <nav>
             <ul>
                 <li><a href="{{ url_for('post.index') }}">首页</a></li>
                 {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
                     <li><a href="{{ url_for('auth.profile') }}">个人中心</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
+                    <li><a href="{{ url_for('notifications.notifications') }}">通知</a></li>
                 {% else %}
                     <li><a href="{{ url_for('auth.login') }}">登录</a></li>
                     <li><a href="{{ url_for('auth.register') }}">注册</a></li>
                 {% endif %}
             </ul>
         </nav>
+        <div style="float: right">
+            <form action="{{ url_for('post.search_post') }}" method="get">
+                <input type="text" name="q" placeholder="点此搜索" >
+            <button type="submit">搜索</button>
+        </form>
+        </div>
     </header>
 
     <main>

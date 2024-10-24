@@ -6,7 +6,9 @@
 {% block content %}
     {% if results %}
         {% for post in results %}
-            <a href="{{ url_for('post.post_detail', post_id=post.id) }}"><p>{{ post.title }}</p></a>
+            <a href="{{ url_for('post.post_detail', post_id=post.id) }}" class="">
+                <p>{{ post.title }}</p>
+            </a>
         {% endfor %}
     {% else %}
         <p>没有查询到目标</p>
